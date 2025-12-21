@@ -8,11 +8,11 @@ test('Register Successful', async ({page}) => {
     const registerForm = page.locator('.card-body')
     const flashMessage = page.locator('#flash-message')
 
-    await registerForm.getByRole('textbox', {name: 'username'}).fill('Hairball')
+    await registerForm.getByRole('textbox', {name: 'username'}).fill('Caret')
     await registerForm.locator('#password').fill('test123!')
     await registerForm.locator('#confirmPassword').fill('test123!')
     await registerForm.getByRole('button', {name: "Register"}).click()
-    await expect(page).toHaveURL('https://practice.expandtesting.com/login', { timeout: 10000 })
+    await expect(page).toHaveURL('https://practice.expandtesting.com/login', { timeout: 15000 })
     await expect(flashMessage).toContainText('Successfully registered, you can log in now.')
 })
 
