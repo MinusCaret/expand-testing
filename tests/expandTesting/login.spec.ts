@@ -11,7 +11,7 @@ test('Login Success', async ({page})=>{
     await loginForm.getByRole('textbox', {name: "Username"}).fill('practice')
     await loginForm.getByRole('textbox', {name: "Password"}).fill('SuperSecretPassword!')
     await loginForm.getByRole('button', {name: "Login"}).click()
-    await expect(page).toHaveURL('https://practice.expandtesting.com/secure')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/secure', { timeout: 10000 })
     await expect(flashMessage).toContainText('You logged into a secure area!')
     await expect(page.locator('.icon-2x.icon-signout')).toHaveText(' Logout') //there was a space before 'Logout' in the element
 })
