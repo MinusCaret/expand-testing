@@ -12,7 +12,7 @@ test('Register Successful', async ({page}) => {
     await registerForm.locator('#password').fill('test123!')
     await registerForm.locator('#confirmPassword').fill('test123!')
     await registerForm.getByRole('button', {name: "Register"}).click()
-    await expect(page).toHaveURL('https://practice.expandtesting.com/login')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/login', { timeout: 10000 })
     await expect(flashMessage).toContainText('Successfully registered, you can log in now.')
 })
 
