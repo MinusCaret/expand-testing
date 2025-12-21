@@ -7,8 +7,9 @@ test.beforeEach(async ({page}) => {
 test('Register Successful', async ({page}) => {
     const registerForm = page.locator('.card-body')
     const flashMessage = page.locator('#flash-message')
+    const username = `Caret_${Date.now()}`
 
-    await registerForm.getByRole('textbox', {name: 'username'}).fill('Caret')
+    await registerForm.getByRole('textbox', {name: '#username'}).fill(username)
     await registerForm.locator('#password').fill('test123!')
     await registerForm.locator('#confirmPassword').fill('test123!')
     await registerForm.getByRole('button', {name: "Register"}).click()
