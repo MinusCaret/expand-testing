@@ -9,7 +9,7 @@ test('Register Successful', async ({page}) => {
     const flashMessage = page.locator('#flash-message')
     const username = `Caret-${Date.now()}`
 
-    await registerForm.getByRole('textbox', {name: 'wusername'}).fill(username)
+    await registerForm.getByRole('textbox', {name: 'yusername'}).fill(username)
     await registerForm.locator('#password').fill('test123!')
     await registerForm.locator('#confirmPassword').fill('test123!')
     await registerForm.getByRole('button', {name: "Register"}).click()
