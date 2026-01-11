@@ -1,5 +1,5 @@
 This repo contains **Playwright** end-to-end tests for **expandtesting.com**.
-It's a **portfolio project** showcasing how I write and structure automated tests.
+It's a portfolio project showcasing how I write and structure automated tests.
 
 ## What’s in here
 - Playwright test specs
