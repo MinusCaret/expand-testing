@@ -1,11 +1,6 @@
-import {test, expect} from '@playwright/test'
+import { test, expect } from '../fixtures/test';
 
-test.beforeEach(async ({page, context})=> {
-    //delyeet ads
-    await context.route(
-    /googleads|doubleclick|googlesyndication/,
-    route => route.abort()
-  )
+test.beforeEach(async ({page})=> {
     await page.goto('https://practice.expandtesting.com/radio-buttons')
 })
 
@@ -30,9 +25,9 @@ test('Colours', async ({page})=> {
         await expect(radio).toBeDisabled()
         await expect(radio).not.toBeChecked()
       } else {
-      await expect(radio).toBeEnabled()
-      await radio.check()
-      await expect(radio).toBeChecked()
+        await expect(radio).toBeEnabled()
+        await radio.check()
+        await expect(radio).toBeChecked()
       }
     }
 })

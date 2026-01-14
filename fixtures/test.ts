@@ -10,3 +10,5 @@ export const test = base.extend({
     await use(context);
   }
 });
+
+export { expect } from '@playwright/test';
