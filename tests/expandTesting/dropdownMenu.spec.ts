@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test'
-
+import { test as blockAds } from '../fixtures/test';
 
 test.beforeEach(async ({page, context}) => {
     //delyeet ads
