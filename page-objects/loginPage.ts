@@ -12,6 +12,11 @@ export class LoginPage {
     this.logoutButton = page.getByRole('link', { name: 'Logout' });
   }
 
+  /**
+   * This method will fill out the login form with user details
+   * @param email - email for test user
+   * @param password - password for test user
+   */
   async submitLoginForm(email: string, password: string) {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
@@ -20,23 +25,25 @@ export class LoginPage {
 
   async loginAsPracticeUser() {
     await this.submitLoginForm('practice', 'SuperSecretPassword!');
-    await expect(this.page).toHaveURL('https://practice.expandtesting.com/secure');
-    await expect(this.flashMessage).toContainText('You logged into a secure area!');
-    await expect(this.logoutButton).toBeVisible();
   }
 
   async loginWithInvalidUsername() {
     await this.submitLoginForm('we', 'SuperSecretPassword!');
-    await expect(this.flashMessage).toContainText('Your username is invalid!');
   }
 
   async loginWithInvalidPassword() {
     await this.submitLoginForm('practice', 'we');
-    await expect(this.flashMessage).toContainText('Your password is invalid!');
   }
 
   async logout() {
     await this.logoutButton.click();
-    await expect(this.flashMessage).toContainText('You logged out of the secure area!');
+  }
+
+  getFlashMessage() {
+    return this.flashMessage
+  }
+
+  getLogoutButton() {
+    return this.logoutButton
   }
 }
