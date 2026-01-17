@@ -5,6 +5,7 @@ It's a portfolio project showcasing how I write and structure automated tests.
 - Playwright test specs
 - Shared setup using `test.beforeEach`
 - UI interaction and assertion checks (dropdowns, forms, basic elements)
+- Introduced ad blocking fixture to remove third-party noise and improve test stability
 
 ## How the tests are structured
 
