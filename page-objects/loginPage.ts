@@ -1,15 +1,16 @@
-import { Page, expect } from '@playwright/test'
+import { Page, Locator } from '@playwright/test'
+
 export class LoginPage {
-  readonly emailInput;
-  readonly passwordInput;
-  readonly flashMessage;
-  readonly logoutButton;
+  readonly emailInput: Locator
+  readonly passwordInput: Locator
+  readonly flashMessage: Locator
+  readonly logoutButton: Locator
 
   constructor(private page: Page) {
-    this.emailInput = page.locator('#username');
-    this.passwordInput = page.locator('#password');
-    this.flashMessage = page.locator('#flash-message');
-    this.logoutButton = page.getByRole('link', { name: 'Logout' });
+    this.emailInput = page.locator('#username')
+    this.passwordInput = page.locator('#password')
+    this.flashMessage = page.locator('#flash-message')
+    this.logoutButton = page.getByRole('link', { name: 'Logout' })
   }
 
   /**
@@ -18,25 +19,25 @@ export class LoginPage {
    * @param password - password for test user
    */
   async submitLoginForm(email: string, password: string) {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.page.locator('button[type="submit"]').click();
+    await this.emailInput.fill(email)
+    await this.passwordInput.fill(password)
+    await this.page.locator('button[type="submit"]').click()
   }
 
   async loginAsPracticeUser() {
-    await this.submitLoginForm('practice', 'SuperSecretPassword!');
+    await this.submitLoginForm('practice', 'SuperSecretPassword!')
   }
 
   async loginWithInvalidUsername() {
-    await this.submitLoginForm('we', 'SuperSecretPassword!');
+    await this.submitLoginForm('we', 'SuperSecretPassword!')
   }
 
   async loginWithInvalidPassword() {
-    await this.submitLoginForm('practice', 'we');
+    await this.submitLoginForm('practice', 'we')
   }
 
   async logout() {
-    await this.logoutButton.click();
+    await this.logoutButton.click()
   }
 
   getFlashMessage() {
