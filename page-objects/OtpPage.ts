@@ -2,6 +2,7 @@ import { Page, Locator } from '@playwright/test'
 
 export class OtpPage {
 
+    readonly page: Page
     readonly emailInput: Locator
     readonly otpInput: Locator
     readonly sendButton: Locator
@@ -12,6 +13,7 @@ export class OtpPage {
     readonly invalidMessage: Locator
 
     constructor(page: Page){
+        this.page = page
         this.emailInput = page.locator('#email')
         this.otpInput = page.locator('#otp')
         this.sendButton = page.getByRole('button', {name: "Send OTP Code"})

@@ -1,12 +1,15 @@
 import { Page, Locator } from '@playwright/test'
 
 export class ForgotPasswordPage {
+    
+    readonly page: Page
     readonly emailInput: Locator
     readonly passwordButton: Locator
     readonly confirmMessage: Locator
     readonly invalidMessage: Locator
 
     constructor(page: Page){
+        this.page = page
         this.emailInput = page.locator('#email')
         this.passwordButton = page.getByRole('button', {name: "Retrieve password"})
         this.confirmMessage = page.locator('#confirmation-alert')

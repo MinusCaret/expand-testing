@@ -1,12 +1,15 @@
 import { Page, Locator } from '@playwright/test'
 
 export class LoginPage {
+
+  readonly page: Page
   readonly emailInput: Locator
   readonly passwordInput: Locator
   readonly flashMessage: Locator
   readonly logoutButton: Locator
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    this.page = page
     this.emailInput = page.locator('#username')
     this.passwordInput = page.locator('#password')
     this.flashMessage = page.locator('#flash-message')
