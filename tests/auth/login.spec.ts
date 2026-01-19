@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/test';
-import { LoginPage } from '../../page-objects/LoginPage';
+import { LoginPage } from '../../page-objects/loginPage';
 
 test.beforeEach(async({page}) => {
    await page.goto("https://practice.expandtesting.com/login")

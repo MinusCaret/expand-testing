@@ -1,37 +1,42 @@
 import { test, expect } from '../../fixtures/test';
+import { OtpPage } from '../../page-objects/OtpPage';
 
 test.beforeEach(async ({page}) => {
     await page.goto('https://practice.expandtesting.com/otp-login')
 })
 
-test('Success', async ({page}) => {
-    const confirmMessage = page.locator('#otp-message')
-    const flashMessage = page.locator('#flash')
+test('Send OTP code to valid email', async ({page}) => {
+    const onOtpPage = new OtpPage(page)
 
-    await page.locator('#email').fill('practice@expandtesting.com')
-    await page.getByRole('button', {name: "Send OTP Code"}).click()
-    await expect(confirmMessage).toContainText("We've sent an OTP code to your email: ")
-    await page.locator('#otp').fill('214365')
-    await page.getByRole('button', {name: "Verify OTP Code"}).click()
-    await expect(page).toHaveURL('https://practice.expandtesting.com/secure')
-    await expect(flashMessage).toContainText('You logged into a secure area!')
+    await onOtpPage.submitOtpForm('practice@expandtesting.com')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/otp-login');
+    await expect(onOtpPage.otpMessage).toContainText('practice@expandtesting.com')
 })
 
-test('Invalid email', async ({page}) => {
-    const confirmMessage = page.locator('#otp-message')
+test('Verify valid OTP code', async ({page}) => {
+    const onOtpPage = new OtpPage(page)
 
-    await page.locator('#email').fill('wew')
-    await page.getByRole('button', {name: "Send OTP Code"}).click()
-    await expect(page.locator('.invalid-feedback')).toContainText(" Please enter a valid email address. ")
+    await onOtpPage.submitOtpForm('practice@expandtesting.com')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/otp-login');
+    await expect(onOtpPage.otpMessage).toContainText('practice@expandtesting.com')
+    await onOtpPage.submitVerifyForm('214365')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/secure');
+    await expect(onOtpPage.flashMessage).toHaveText('You logged into a secure area!')
 })
 
-test('Invalid OTP', async ({page}) => {
-    const confirmMessage = page.locator('#otp-message')
+test('Send OTP code to invalid email', async ({page}) => {
+    const onOtpPage = new OtpPage(page)
 
-    await page.locator('#email').fill('practice@expandtesting.com')
-    await page.getByRole('button', {name: "Send OTP Code"}).click()
-    await expect(confirmMessage).toContainText("We've sent an OTP code to your email: ")
-    await page.locator('#otp').fill('1')
-    await page.getByRole('button', {name: "Verify OTP Code"}).click()
-    await expect(page.locator('.alert-danger')).toContainText("The provided OTP code is incorrect. Please check your code and try again.")
+    await onOtpPage.submitOtpForm('test')
+    await expect(onOtpPage.invalidMessage).toBeVisible()
+})
+
+test('Verify invalid OTP', async ({page}) => {
+    const onOtpPage = new OtpPage(page)
+
+    await onOtpPage.submitOtpForm('practice@expandtesting.com')
+    await expect(page).toHaveURL('https://practice.expandtesting.com/otp-login');
+    await expect(onOtpPage.otpMessage).toContainText('practice@expandtesting.com')
+    await onOtpPage.submitVerifyForm('1')
+    await expect(onOtpPage.otpMessage).toContainText('The provided OTP code is incorrect. Please check your code and try again.')
 })

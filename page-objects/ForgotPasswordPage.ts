@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test'
+
 export class ForgotPasswordPage {
     readonly emailInput: Locator
     readonly passwordButton: Locator
