@@ -17,7 +17,7 @@ export class LoginPage {
   }
 
   /**
-   * This method will fill out the login form with user details
+   * Fills out the login form with user details
    * @param email - email for test user
    * @param password - password for test user
    */
