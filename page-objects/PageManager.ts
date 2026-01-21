@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { CheckboxPage } from './CheckboxPage'
 import { ForgotPasswordPage } from './ForgotPasswordPage'
-import { LoginPage } from './LoginPage'
+import { LoginPage } from './LoginPage-temp'
 import { OtpPage } from './OtpPage'
 import { RegisterPage } from './RegisterPage'
 
@@ -42,5 +42,5 @@ export class PageManager{
     onRegisterPage(){
         return this.registerPage
     }
-    
+
 }
