@@ -1,6 +1,6 @@
 import { test, expect } from '../../fixtures/test';
 import { PageManager } from '../../page-objects/PageManager';
-import { LoginPage } from '../../page-objects/LoginPage-temp';
+import { LoginPage } from '../../page-objects/LoginPage';
 
 test.beforeEach(async({page}) => {
    await page.goto("https://practice.expandtesting.com/login")

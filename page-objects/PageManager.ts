@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { CheckboxPage } from './CheckboxPage'
 import { ForgotPasswordPage } from './ForgotPasswordPage'
-import { LoginPage } from './LoginPage-temp'
+import { LoginPage } from './LoginPage'
 import { OtpPage } from './OtpPage'
 import { RegisterPage } from './RegisterPage'
 
