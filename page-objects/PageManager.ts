@@ -42,4 +42,5 @@ export class PageManager{
     onRegisterPage(){
         return this.registerPage
     }
+    
 }
