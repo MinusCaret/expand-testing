@@ -1,18 +1,20 @@
 import { test, expect } from '../../fixtures/test';
-import { ForgotPasswordPage } from '../../page-objects/ForgotPasswordPage';
+import { PageManager } from '../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {
     await page.goto('https://practice.expandtesting.com/forgot-password')
 })
 
 test('Submit form with valid credential', async ({page}) => {
-    const onForgotPasswordForm = new ForgotPasswordPage(page)
-    await onForgotPasswordForm.submitForgotPassword("test@test.com")
-    await expect(onForgotPasswordForm.getConfirmMessage()).toBeVisible()
+    const pm = new PageManager(page)
+
+    await pm.onForgotPasswordPage().submitForgotPassword("test@test.com")
+    await expect(pm.onForgotPasswordPage().getConfirmMessage()).toBeVisible()
 })
 
 test('Submit form with invalid credential', async ({page}) => {
-    const onForgotPasswordForm = new ForgotPasswordPage(page)
-    await onForgotPasswordForm.submitForgotPassword("we")
-    await expect(onForgotPasswordForm.getInvalidMessage()).toBeVisible()
+    const pm = new PageManager(page)
+
+    await pm.onForgotPasswordPage().submitForgotPassword("we")
+    await expect(pm.onForgotPasswordPage().getInvalidMessage()).toBeVisible()
 })
