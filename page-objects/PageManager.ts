@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test'
-import { CheckboxPage } from './CheckboxPage'
-import { ForgotPasswordPage } from './ForgotPasswordPage'
-import { LoginPage } from './LoginPage'
-import { OtpPage } from './OtpPage'
-import { RegisterPage } from './RegisterPage'
+import { CheckboxPage } from './forms/CheckboxPage'
+import { ForgotPasswordPage } from './auth/ForgotPasswordPage'
+import { LoginPage } from './auth/LoginPage'
+import { OtpPage } from './auth/OtpPage'
+import { RegisterPage } from './auth/RegisterPage'
 
 export class PageManager{
 
