@@ -12,6 +12,10 @@ export class HelperBase{
         await locator.click()
     }
 
+    async fill(locator:Locator, value: string){
+        await locator.fill(value)
+    }
+
     async expectVisible(locator: Locator) {
         await expect(locator).toBeVisible()
     }

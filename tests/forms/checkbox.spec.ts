@@ -1,7 +1,7 @@
 import { test, expect } from '../../fixtures/test';
 import { PageManager } from '../../page-objects/PageManager';
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({page}) => {
     await page.goto('https://practice.expandtesting.com/checkboxes')
 })
 

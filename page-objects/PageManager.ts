@@ -4,6 +4,7 @@ import { ForgotPasswordPage } from './auth/ForgotPasswordPage'
 import { LoginPage } from './auth/LoginPage'
 import { OtpPage } from './auth/OtpPage'
 import { RegisterPage } from './auth/RegisterPage'
+import { ContactPage } from './forms/ContactPage'
 
 export class PageManager{
 
@@ -13,6 +14,7 @@ export class PageManager{
     private readonly loginPage: LoginPage
     private readonly otpPage: OtpPage
     private readonly registerPage: RegisterPage
+    private readonly contactPage: ContactPage
 
     constructor(page: Page){
         this.page = page
@@ -21,6 +23,7 @@ export class PageManager{
         this.loginPage = new LoginPage(this.page)
         this.otpPage = new OtpPage(this.page)
         this.registerPage = new RegisterPage(this.page)
+        this.contactPage = new ContactPage(this.page)
     }
 
     onCheckboxPage(){
@@ -41,6 +44,10 @@ export class PageManager{
 
     onRegisterPage(){
         return this.registerPage
+    }
+
+    onContactPage(){
+        return this.contactPage
     }
 
 }
