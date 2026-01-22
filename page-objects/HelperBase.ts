@@ -1,4 +1,4 @@
-import { Page, expect } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 
 export class HelperBase{
 
@@ -8,17 +8,16 @@ export class HelperBase{
         this.page = page
     }
 
-    async click(locator: string){
-        await this.page.locator(locator).click()
+    async click(locator: Locator){
+        await locator.click()
     }
 
-    async expectVisible(locator: string) {
-        await expect(this.page.locator(locator)).toBeVisible()
+    async expectVisible(locator: Locator) {
+        await expect(locator).toBeVisible()
     }
 
     async waitForNumberOfSeconds(timeInSeconds: number){
         await this.page.waitForTimeout(timeInSeconds * 1000)
     }
-
 
 }

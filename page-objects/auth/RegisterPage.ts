@@ -1,8 +1,8 @@
 import { Page, Locator } from '@playwright/test'
+import { HelperBase } from '../helperBase'
 
-export class RegisterPage {
+export class RegisterPage extends HelperBase {
 
-    readonly page: Page
     readonly usernameInput: Locator
     readonly passwordInput: Locator
     readonly confirmPasswordInput: Locator
@@ -10,7 +10,7 @@ export class RegisterPage {
     readonly flashMessage: Locator
 
     constructor(page:Page){
-        this.page = page
+        super(page)
         this.usernameInput = page.locator('#username')
         this.passwordInput = page.locator('#password')
         this.confirmPasswordInput = page.locator('#confirmPassword')
@@ -28,7 +28,7 @@ export class RegisterPage {
         await this.usernameInput.fill(username)
         await this.passwordInput.fill(password)
         await this.confirmPasswordInput.fill(confirm)
-        await this.registerButton.click()
+        await this.click(this.registerButton)
     }
 
     getFlashMessage(){
