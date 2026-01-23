@@ -8,16 +8,24 @@ export class HelperBase{
         this.page = page
     }
 
+    async check(locator:Locator){
+        await locator.check()
+    }
+
     async click(locator: Locator){
         await locator.click()
+    }
+
+    async expectVisible(locator: Locator){
+        await expect(locator).toBeVisible()
     }
 
     async fill(locator:Locator, value: string){
         await locator.fill(value)
     }
 
-    async expectVisible(locator: Locator) {
-        await expect(locator).toBeVisible()
+    async uncheck(locator:Locator){
+        await locator.uncheck()
     }
 
     async waitForNumberOfSeconds(timeInSeconds: number){

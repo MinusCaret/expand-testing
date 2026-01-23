@@ -1,31 +1,31 @@
 import { Page, Locator } from '@playwright/test'
+import { HelperBase } from '../helperBase'
 
-export class CheckboxPage {
+export class CheckboxPage extends HelperBase{
 
-    readonly page: Page
     readonly checkboxOne: Locator
     readonly checkboxTwo: Locator
 
     constructor(page: Page){
-        this.page = page
+        super(page)
         this.checkboxOne = page.locator('#checkbox1')
         this.checkboxTwo = page.locator('#checkbox2')
     }
 
     async checkCheckboxOne(){
-        await this.checkboxOne.check()
+        await this.check(this.checkboxOne)
     }
 
     async checkCheckboxTwo(){
-        await this.checkboxTwo.check()
+        await this.check(this.checkboxTwo)
     }
 
     async uncheckCheckboxOne(){
-        await this.checkboxOne.uncheck()
+        await this.uncheck(this.checkboxOne)
     }
 
     async uncheckCheckboxTwo(){
-        await this.checkboxTwo.uncheck()
+        await this.uncheck(this.checkboxTwo)
     }
 
 }

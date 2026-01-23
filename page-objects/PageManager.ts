@@ -5,6 +5,7 @@ import { LoginPage } from './auth/LoginPage'
 import { OtpPage } from './auth/OtpPage'
 import { RegisterPage } from './auth/RegisterPage'
 import { ContactPage } from './forms/ContactPage'
+import { DropdownMenuPage } from './forms/DropdownMenuPage'
 
 export class PageManager{
 
@@ -24,6 +25,10 @@ export class PageManager{
         this.otpPage = new OtpPage(this.page)
         this.registerPage = new RegisterPage(this.page)
         this.contactPage = new ContactPage(this.page)
+    }
+
+    getDropdown(selector: string){
+        return new DropdownMenuPage(this.page, selector)
     }
 
     onCheckboxPage(){
@@ -49,5 +54,4 @@ export class PageManager{
     onContactPage(){
         return this.contactPage
     }
-
 }
