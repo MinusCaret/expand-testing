@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/test';
+import { test } from '../../fixtures/test';
 import { PageManager } from '../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {

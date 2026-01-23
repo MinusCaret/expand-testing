@@ -20,17 +20,18 @@ export class DropdownMenuPage extends HelperBase{
     async validateDropdownIsUsable() {
     // has options
     const count = await this.options.count()
+    //expect dropdown isn't empty
     expect(count).toBeGreaterThan(0)
 
     // grab all values dynamically
     const values = await this.options.evaluateAll(
-      opts => opts.map(o => (o as HTMLOptionElement).value)
+        opts => opts.map(o => (o as HTMLOptionElement).value)
     )
 
     // loop & validate selection works
     for (const value of values) {
-      await this.menu.selectOption(value)
-      await expect(this.menu).toHaveValue(value)
+        await this.menu.selectOption(value)
+        await expect(this.menu).toHaveValue(value)
     }
   }
 }
