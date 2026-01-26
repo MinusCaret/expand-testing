@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test'
 import { HelperBase } from '../helperBase'
 
-export class CheckboxPage extends HelperBase{
+export class CheckboxPage extends HelperBase {
 
     readonly checkboxOne: Locator
     readonly checkboxTwo: Locator
