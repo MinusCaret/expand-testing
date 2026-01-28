@@ -1,15 +1,15 @@
 import { Page, Locator } from '@playwright/test'
+import { HelperBase } from '../HelperBase'
 
-export class ForgotPasswordPage {
+export class ForgotPasswordPage extends HelperBase {
     
-    readonly page: Page
     readonly emailInput: Locator
     readonly passwordButton: Locator
     readonly confirmMessage: Locator
     readonly invalidMessage: Locator
 
     constructor(page: Page){
-        this.page = page
+        super(page)
         this.emailInput = page.locator('#email')
         this.passwordButton = page.getByRole('button', {name: "Retrieve password"})
         this.confirmMessage = page.locator('#confirmation-alert')
@@ -17,8 +17,8 @@ export class ForgotPasswordPage {
     }
 
     async submitForgotPassword(email: string){
-        await this.emailInput.fill(email)
-        await this.passwordButton.click()
+        await this.fill(this.emailInput, email)
+        await this.click(this.passwordButton)
     }
 
     getConfirmMessage(){

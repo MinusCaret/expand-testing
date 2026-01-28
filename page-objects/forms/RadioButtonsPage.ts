@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test'
-import { HelperBase } from '../helperBase'
+import { HelperBase } from '../HelperBase'
 
 export class RadioButtonsPage extends HelperBase{
 

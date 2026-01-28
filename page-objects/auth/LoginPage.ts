@@ -1,18 +1,20 @@
 import { Page, Locator } from '@playwright/test'
+import { HelperBase } from '../HelperBase'
 
-export class LoginPage {
+export class LoginPage extends HelperBase{
 
-  readonly page: Page
   readonly emailInput: Locator
   readonly passwordInput: Locator
   readonly flashMessage: Locator
+  readonly loginButton: Locator
   readonly logoutButton: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.emailInput = page.locator('#username')
     this.passwordInput = page.locator('#password')
     this.flashMessage = page.locator('#flash-message')
+    this.loginButton = page.getByRole('button', {name: "Login"})
     this.logoutButton = page.getByRole('link', { name: 'Logout' })
   }
 
@@ -22,9 +24,9 @@ export class LoginPage {
    * @param password - password for test user
    */
   async submitLoginForm(email: string, password: string) {
-    await this.emailInput.fill(email)
-    await this.passwordInput.fill(password)
-    await this.page.locator('button[type="submit"]').click()
+    await this.fill(this.emailInput, email)
+    await this.fill(this.passwordInput, password)
+    await this.click(this.loginButton)
   }
 
   async loginAsPracticeUser() {

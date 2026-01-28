@@ -1,8 +1,8 @@
 import { Page, Locator } from '@playwright/test'
+import { HelperBase } from '../HelperBase'
 
-export class OtpPage {
+export class OtpPage extends HelperBase{
 
-    readonly page: Page
     readonly emailInput: Locator
     readonly otpInput: Locator
     readonly sendButton: Locator
@@ -13,7 +13,7 @@ export class OtpPage {
     readonly invalidMessage: Locator
 
     constructor(page: Page){
-        this.page = page
+        super(page)
         this.emailInput = page.locator('#email')
         this.otpInput = page.locator('#otp')
         this.sendButton = page.getByRole('button', {name: "Send OTP Code"})
@@ -25,13 +25,13 @@ export class OtpPage {
     }
 
     async submitOtpForm(email: string){
-        await this.emailInput.fill(email)
-        await this.sendButton.click()
+        await this.fill(this.emailInput, email)
+        await this.click(this.sendButton)
     }
 
     async submitVerifyForm(code: string){
-        await this.otpInput.fill(code)
-        await this.verifyButton.click()
+        await this.fill(this.otpInput, code)
+        await this.click(this.verifyButton)
     }
 
     getConfirmMessage(){
