@@ -6,6 +6,7 @@ import { OtpPage } from './auth/OtpPage'
 import { RegisterPage } from './auth/RegisterPage'
 import { ContactPage } from './forms/ContactPage'
 import { DropdownMenuPage } from './forms/DropdownMenuPage'
+import { RadioButtonsPage } from './forms/RadioButtonsPage'
 
 export class PageManager{
 
@@ -29,6 +30,10 @@ export class PageManager{
 
     getDropdown(selector: string){
         return new DropdownMenuPage(this.page, selector)
+    }
+
+    getRadioButton(selector: string){
+        return new RadioButtonsPage(this.page, selector)
     }
 
     onCheckboxPage(){
