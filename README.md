@@ -1,5 +1,5 @@
 This repo contains **Playwright** E2E tests for **expandtesting.com**.
-It's a portfolio project showcasing how I write and structure automated tests. `@faker-js/faker` is used to generate dynamic test data during execution.
+It's a portfolio project showcasing how I write and structure automated tests. `@faker-js/faker` is used to generate dynamic test data during execution (see contact.spec.ts).
 
 ## What’s in here
 - Playwright tests covering forms, UI testing and more
