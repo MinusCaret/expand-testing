@@ -5,7 +5,8 @@ It's a portfolio project showcasing how I write and structure automated tests.
 - Playwright tests covering forms, UI testing and more
 - Tests are currently functional and cover positive & negative scenarios
 - Introduced ad blocking fixture to remove third-party noise and improve test stability
-- **Work in progress:** Refactoring existing tests into a POM structure for improved maintainability and scalability
+- Utilises a POM structure for improved maintainability and scalability
+- Tests are automatically executed via **GitHub Actions** on push and pull request to validate changes and catch regressions early.
 
 ## How the tests are structured
 
