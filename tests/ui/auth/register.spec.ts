@@ -1,15 +1,15 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/register')
+    await page.goto('/register')
 })
 
 test('Register success', async ({page}) => {
     const pm = new PageManager(page)
 
     await pm.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, 'test123!', 'test123!')
-    await expect(page).toHaveURL('https://practice.expandtesting.com/login', { timeout: 15000 })
+    await expect(page).toHaveURL('/login', { timeout: 15000 })
     await expect(pm.onRegisterPage().flashMessage).toContainText('Successfully registered, you can log in now.')
 })
 

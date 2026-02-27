@@ -1,7 +1,7 @@
-import { test, expect } from '../../fixtures/test';
+import { test, expect } from '../../../fixtures/test';
 
 test.beforeEach(async ({page})=> {
-    await page.goto('https://practice.expandtesting.com/tooltips')
+    await page.goto('/tooltips')
 })
 
 test('Tooltip Top', async ({page}) => {

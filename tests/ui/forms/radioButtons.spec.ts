@@ -1,8 +1,8 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async ({page})=> {
-    await page.goto('https://practice.expandtesting.com/radio-buttons')
+    await page.goto('/radio-buttons')
 })
 
 test('Colours', async ({page}) => {

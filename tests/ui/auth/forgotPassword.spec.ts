@@ -1,8 +1,8 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/forgot-password')
+    await page.goto('/forgot-password')
 })
 
 test('Submit form with valid credential', async ({page}) => {

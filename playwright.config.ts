@@ -35,21 +35,30 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'api',
+      testDir: './tests/api',
+      use: { 
+        baseURL: 'https://fakestoreapi.com' 
+      },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'ui-chrome',
+      testDir: './tests/ui',
+      use: { 
+        ...devices['Desktop Chrome'],
+        baseURL: 'https://practice.expandtesting.com' 
+      },
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'ui-firefox',
+      testDir: './tests/ui',
+      use: { 
+        ...devices['Desktop Firefox'],
+        baseURL: 'https://practice.expandtesting.com' 
+      },
     },
-
-
 
     /* Test against mobile viewports. */
     // {

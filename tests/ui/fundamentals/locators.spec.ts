@@ -1,7 +1,7 @@
-import { test, expect } from '../../fixtures/test';
+import { test, expect } from '../../../fixtures/test';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/locators')
+    await page.goto('/locators')
 })
 
 test ('getbyRole Button', async ({page}) => {
@@ -10,5 +10,5 @@ test ('getbyRole Button', async ({page}) => {
 
 test ('getbyRole Link', async ({page}) => {
     await page.getByRole('link', {name: "Contact"}).click()
-    await expect(page).toHaveURL('https://practice.expandtesting.com/contact')
+    await expect(page).toHaveURL('/contact')
 })

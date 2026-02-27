@@ -1,8 +1,8 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async({page}) => {
-   await page.goto("https://practice.expandtesting.com/login")
+   await page.goto('/login')
  })
 
  test('Login successfully with valid credentials', async ({page}) => {
@@ -10,7 +10,7 @@ test.beforeEach(async({page}) => {
 
    await pm.onLoginPage().loginAsPracticeUser()
    await expect(pm.onLoginPage().getFlashMessage()).toContainText('You logged into a secure area!')
-   await expect(page).toHaveURL('https://practice.expandtesting.com/secure');
+   await expect(page).toHaveURL('/secure');
    await expect(pm.onLoginPage().getLogoutButton()).toBeVisible()
  })
 

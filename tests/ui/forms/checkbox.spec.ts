@@ -1,8 +1,8 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/checkboxes')
+    await page.goto('/checkboxes')
 })
 
 test('Checkbox 1 can be checked from default unchecked state', async({ page })=> {

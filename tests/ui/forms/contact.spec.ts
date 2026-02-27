@@ -1,9 +1,9 @@
-import { test, expect } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test, expect } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 import {faker} from '@faker-js/faker';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/contact')
+    await page.goto('/contact')
 })
 
 test('Successfully submit form', async ({page}) => {
@@ -17,4 +17,5 @@ test('Successfully submit form', async ({page}) => {
 })
 
 //submitting the form with empty input fields does not trigger any state changes
+//submitting the form with an invalid email does not trigger any state changes
 

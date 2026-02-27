@@ -1,8 +1,8 @@
-import { test } from '../../fixtures/test';
-import { PageManager } from '../../page-objects/PageManager';
+import { test } from '../../../fixtures/test';
+import { PageManager } from '../../../page-objects/PageManager';
 
 test.beforeEach(async ({page}) => {
-    await page.goto('https://practice.expandtesting.com/dropdown')
+    await page.goto('/dropdown')
 })
 
 test('Validate options in Simple dropdown', async ({page}) => {
