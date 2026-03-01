@@ -10,13 +10,13 @@ import { RadioButtonsPage } from './forms/RadioButtonsPage'
 
 export class PageManager{
 
-    private readonly page: Page
-    private readonly checkboxPage: CheckboxPage
-    private readonly forgotPasswordPage: ForgotPasswordPage
-    private readonly loginPage: LoginPage
-    private readonly otpPage: OtpPage
-    private readonly registerPage: RegisterPage
-    private readonly contactPage: ContactPage
+    readonly page: Page
+    readonly checkboxPage: CheckboxPage
+    readonly forgotPasswordPage: ForgotPasswordPage
+    readonly loginPage: LoginPage
+    readonly otpPage: OtpPage
+    readonly registerPage: RegisterPage
+    readonly contactPage: ContactPage
 
     constructor(page: Page){
         this.page = page

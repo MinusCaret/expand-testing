@@ -1,56 +1,59 @@
 import { test, expect } from '../../../fixtures/test';
-import { PageManager } from '../../../page-objects/PageManager';
+import { faker } from '@faker-js/faker';
 
 test.beforeEach(async ({page}) => {
     await page.goto('/register')
 })
 
-test('Register success', async ({page}) => {
-    const pm = new PageManager(page)
+test('Register success', async ({ pageManager }) => {
+    const randomUsername = (faker.person.firstName() + faker.person.lastName()).toLowerCase() + faker.number.int(500)
+    const randomPassword = faker.internet.password()
 
-    await pm.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, 'test123!', 'test123!')
-    await expect(page).toHaveURL('/login', { timeout: 15000 })
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Successfully registered, you can log in now.')
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials(randomUsername, randomPassword, randomPassword)
+    await expect(pageManager.page).toHaveURL('/login')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Successfully registered, you can log in now.')
 })
 
-test('Username too short', async ({page}) => {
-    const pm = new PageManager(page)
-
-    await pm.onRegisterPage().submitRegisterFormWithCredentials('a', 'test123!', 'test123!')
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Username must be at least 3 characters long.')
+test('Username too short', async ({ pageManager }) => {
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials('a', 'test123!', 'test123!')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Username must be at least 3 characters long.')
 })
 
-test('Password too short', async ({page}) => {
-    const pm = new PageManager(page)
-
-    await pm.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, 'a', 'a')
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Password must be at least 4 characters long.')
+test('Password too short', async ({ pageManager }) => {
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, 'a', 'a')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Password must be at least 4 characters long.')
 })
 
-test('Incorrect password', async ({page}) => {
-    const pm = new PageManager(page)
+//site does not have a password length limit
+// test('Password too long', async ({ pageManager }) => {
+//     const longPassword = faker.internet.password({ length: 100 })
+//     await pageManager.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, longPassword, longPassword)
+// })
 
-    await pm.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, 'test123!', 'test')
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Passwords do not match.')
+test('Incorrect password', async ({ pageManager }) => {
+    const randomPassword = faker.internet.password()
+
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials(`caret-${Date.now()}`, randomPassword, randomPassword + 'a')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Passwords do not match.')
 })
 
-test('Submit form without input', async ({page}) => {
-    const pm = new PageManager(page)
-
-    await pm.onRegisterPage().registerButton.click()
-    await expect(pm.onRegisterPage().flashMessage).toContainText('All fields are required.')
+test('Submit form without input', async ({ pageManager }) => {
+    await pageManager.onRegisterPage().registerButton.click()
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('All fields are required.')
 })
 
-test('Username with spaces', async ({page}) => {
-    const pm = new PageManager(page)
-
-    await pm.onRegisterPage().submitRegisterFormWithCredentials('te st', 'test123!', 'test123!')
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Invalid username')
+test('Username with spaces', async ({ pageManager }) => {
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials('te st', 'test123!', 'test123!')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Invalid username')
 })
 
-test('Leading and trailing whitespace is handled correctly', async ({page}) => {
-    const pm = new PageManager(page)
+test('Username with hyphen', async ({ pageManager }) => {
+    const username = faker.person.firstName().toLowerCase() + '.' + faker.person.lastName().toLowerCase()
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials(username, 'test123!', 'test123!')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Invalid username')
+})
 
-    await pm.onRegisterPage().submitRegisterFormWithCredentials('    abv   ', 'test123!', 'test123!')
-    await expect(pm.onRegisterPage().flashMessage).toContainText('Invalid username')
+test('Leading and trailing whitespace is handled correctly', async ({ pageManager }) => {
+    await pageManager.onRegisterPage().submitRegisterFormWithCredentials('    abc   ', 'test123!', 'test123!')
+    await expect(pageManager.onRegisterPage().flashMessage).toContainText('Invalid username')
 })

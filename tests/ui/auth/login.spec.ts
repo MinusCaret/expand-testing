@@ -1,37 +1,28 @@
 import { test, expect } from '../../../fixtures/test';
-import { PageManager } from '../../../page-objects/PageManager';
 
-test.beforeEach(async({page}) => {
+test.beforeEach(async({ page }) => {
    await page.goto('/login')
  })
 
- test('Login successfully with valid credentials', async ({page}) => {
-   const pm = new PageManager(page)
-
-   await pm.onLoginPage().loginAsPracticeUser()
-   await expect(pm.onLoginPage().getFlashMessage()).toContainText('You logged into a secure area!')
-   await expect(page).toHaveURL('/secure');
-   await expect(pm.onLoginPage().getLogoutButton()).toBeVisible()
+ test('Login successfully with valid credentials', async ({ pageManager }) => {
+   await pageManager.onLoginPage().loginAsPracticeUser()
+   await expect(pageManager.onLoginPage().getFlashMessage()).toContainText('You logged into a secure area!')
+   await expect(pageManager.page).toHaveURL('/secure');
+   await expect(pageManager.onLoginPage().getLogoutButton()).toBeVisible()
  })
 
- test('Invalid Username', async ({page}) => {
-   const pm = new PageManager(page)
-
-   await pm.onLoginPage().loginWithInvalidUsername()
-   await expect(pm.onLoginPage().getFlashMessage()).toContainText('Your username is invalid!')
+ test('Invalid Username', async ({ pageManager }) => {
+   await pageManager.onLoginPage().loginWithInvalidUsername()
+   await expect(pageManager.onLoginPage().getFlashMessage()).toContainText('Your username is invalid!')
  })
 
- test('Invalid Password', async ({page}) => {
-   const pm = new PageManager(page)
-
-   await pm.onLoginPage().loginWithInvalidPassword()
-   await expect(pm.onLoginPage().getFlashMessage()).toContainText('Your password is invalid!')
+ test('Invalid Password', async ({ pageManager }) => {
+   await pageManager.onLoginPage().loginWithInvalidPassword()
+   await expect(pageManager.onLoginPage().getFlashMessage()).toContainText('Your password is invalid!')
  })
 
- test('Logout', async ({page}) => {
-   const pm = new PageManager(page)
-
-   await pm.onLoginPage().loginAsPracticeUser()
-   await pm.onLoginPage().logout()
-   await expect(pm.onLoginPage().getFlashMessage()).toContainText('You logged out of the secure area!')
+ test('Logout', async ({ pageManager }) => {
+   await pageManager.onLoginPage().loginAsPracticeUser()
+   await pageManager.onLoginPage().logout()
+   await expect(pageManager.onLoginPage().getFlashMessage()).toContainText('You logged out of the secure area!')
  })
