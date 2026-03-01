@@ -47,7 +47,7 @@ test('Username with spaces', async ({ pageManager }) => {
     await expect(pageManager.onRegisterPage().flashMessage).toContainText('Invalid username')
 })
 
-test('Username with hyphen', async ({ pageManager }) => {
+test('Username with period', async ({ pageManager }) => {
     const username = faker.person.firstName().toLowerCase() + '.' + faker.person.lastName().toLowerCase()
     await pageManager.onRegisterPage().submitRegisterFormWithCredentials(username, 'test123!', 'test123!')
     await expect(pageManager.onRegisterPage().flashMessage).toContainText('Invalid username')
