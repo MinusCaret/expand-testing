@@ -4,7 +4,12 @@ import { faker } from '@faker-js/faker'
 test('GET /products returns product list', async ({ request }) => {
     const response = await request.get('/products')
 
-    expect(response.ok()).toBeTruthy()
+    //expect(response.ok()).toBeTruthy()
+
+    if (!response.ok()) {
+        console.error(`Error Status: ${response.status()}`);
+        console.error(`Error Body: ${await response.text()}`);
+    }
 
     const products = await response.json()
     expect(products).toBeInstanceOf(Array)

@@ -38,7 +38,11 @@ export default defineConfig({
       name: 'api',
       testDir: './tests/api',
       use: { 
-        baseURL: 'https://fakestoreapi.com'
+        baseURL: 'https://fakestoreapi.com',
+        extraHTTPHeaders: {
+          'Accept': 'application/json',
+          'User-Agent': 'Playwright-Testing',
+      },
       },
     },
 
