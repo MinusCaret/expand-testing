@@ -7,11 +7,18 @@ test('GET /products returns product list', async ({ page }) => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify(mockProducts)
+            json: mockProducts
         })
     }) 
 
     const response = await page.request.get('/products')
+
+    const contentType = response.headers()['content-type']
+    if (!contentType || !contentType.includes('application/json')) {
+        const body = await response.text()
+        throw new Error(`Expected JSON but got ${contentType}. Body: ${body.slice(0, 100)}...`)
+    }
+    
     const products = await response.json()
     
     expect(response.ok()).toBeTruthy()
