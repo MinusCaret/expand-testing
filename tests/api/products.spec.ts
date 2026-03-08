@@ -6,7 +6,8 @@ test('GET /products returns product list', async ({ page }) => {
     await page.route('**/products', async route => {
         await route.fulfill({
             status: 200,
-            json: mockProducts
+            contentType: 'application/json',
+            body: JSON.stringify(mockProducts)
         })
     }) 
 
