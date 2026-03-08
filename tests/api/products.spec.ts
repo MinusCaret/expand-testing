@@ -84,3 +84,10 @@ test('PUT /products/{id} updates product by ID', async ({ request }) => {
 test('DEL /products/{id} deletes specific product by ID', async ({ request }) => {
 
 }) 
+
+test('CI Friendly GET', async ({ request }) => {
+  const res = await request.get('https://jsonplaceholder.typicode.com/posts/1')
+  expect(res.ok()).toBeTruthy()
+  const body = await res.json()
+  expect(body.id).toBe(1)
+})
