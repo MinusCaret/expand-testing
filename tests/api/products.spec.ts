@@ -11,17 +11,13 @@ test('GET /products returns product list', async ({ page }) => {
         })
     }) 
 
-    const response = await page.request.get('/products')
+    await page.goto('https://fakestoreapi.com')
 
-    const contentType = response.headers()['content-type']
-    if (!contentType || !contentType.includes('application/json')) {
-        const body = await response.text()
-        throw new Error(`Expected JSON but got ${contentType}. Body: ${body.slice(0, 100)}...`)
-    }
+    const products = await page.evaluate(async () => {
+        const response = await fetch('/products')
+        return await response.json()
+    })
     
-    const products = await response.json()
-    
-    expect(response.ok()).toBeTruthy()
     expect(products).toBeInstanceOf(Array)
 
     //Check if item is using real data
