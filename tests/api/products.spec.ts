@@ -1,28 +1,25 @@
 import { test, expect } from '@playwright/test'
+import mockProducts from '../../test-data/mockProducts.json'
 import { faker } from '@faker-js/faker'
 
-// test('GET /products returns product list', async ({ request }) => {
-//     const response = await request.get('/products')
+test('GET /products returns product list', async ({ page }) => {
+    await page.route('**/products', async route => {
+        await route.fulfill({
+            status: 200,
+            json: mockProducts
+        })
+    }) 
 
-//     //expect(response.ok()).toBeTruthy()
+    const response = await page.request.get('/products')
+    const products = await response.json()
+    
+    expect(response.ok()).toBeTruthy()
+    expect(products).toBeInstanceOf(Array)
 
-//     if (!response.ok()) {
-//         console.error(`Error Status: ${response.status()}`);
-//         console.error(`Error Body: ${await response.text()}`);
-//     }
-
-//     const products = await response.json()
-//     expect(products).toBeInstanceOf(Array)
-//     expect(products.length).toBeGreaterThan(0)
-
-//     expect(products[0]).toMatchObject({
-//     id: expect.any(Number),
-//     title: expect.any(String),
-//     price: expect.any(Number),
-//     category: expect.any(String),
-//   })
-//     console.log(products)
-// })
+    //Check if item is using real data
+    expect(products[0].title).toContain('Fjallraven')
+    expect(products.length).toBe(20);
+})
 
 // test('GET /products/{id} returns single product', async ({ request }) => {
 //     const randomId = Math.floor(Math.random() * 20) + 1
@@ -84,10 +81,3 @@ import { faker } from '@faker-js/faker'
 // test('DEL /products/{id} deletes specific product by ID', async ({ request }) => {
 
 // }) 
-
-test('CI Friendly GET', async ({ request }) => {
-  const res = await request.get('https://jsonplaceholder.typicode.com/posts/1')
-  expect(res.ok()).toBeTruthy()
-  const body = await res.json()
-  expect(body.id).toBe(1)
-})

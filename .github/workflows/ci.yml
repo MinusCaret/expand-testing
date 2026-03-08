@@ -26,4 +26,4 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npx playwright test --project=api --project=ui-chrome
+        run: npx playwright test
