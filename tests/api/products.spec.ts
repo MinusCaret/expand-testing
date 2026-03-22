@@ -107,9 +107,39 @@ test('POST /products creates a new product', async ({ page }) => {
     console.log(responseBody)
 })
 
-// test('PUT /products/{id} updates product by ID', async ({ request }) => {
+test('PUT /products/{id} updates product by ID', async ({ page }) => {
+    const productId = 1
+    const updatedData = {
+        title: faker.commerce.productName(),
+        price: faker.number.float({ fractionDigits: 2, min: 5, max: 100 }),
+        description: faker.commerce.productDescription(),
+        category: faker.commerce.product(), //api accepts anything as long as it's a string, otherwise use an array
+        image: faker.image.url()
+    }
 
-// })
+     await page.route('**/products/*', async route => {
+        await route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ ...updatedData, id: productId })
+        })
+    })
+
+    await page.goto('https://fakestoreapi.com')
+
+    const responseBody = await page.evaluate(async ({ id, data }) => {
+        const response = await fetch(`/products/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        return await response.json()
+    }, { id: productId, data: updatedData })
+
+    expect(responseBody.title).toBe(updatedData.title)
+
+    console.log(responseBody)
+})
 
 // test('DEL /products/{id} deletes specific product by ID', async ({ request }) => {
 
